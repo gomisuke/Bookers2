@@ -1,0 +1,22 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<h1>Editing Book</h1>
+			<%= form_for (@book) do |f| %>
+			<%= render 'layouts/error_messages', model: f.object %>
+			<div class="form-group">
+				<%= f.label :title, "Title" %>
+				<%= f.text_field :title, class:"form-control" %>
+			</div>
+			<div class="form-group">
+				<%= f.label :body, "Opinion" %>
+				<%= f.text_area :body, class:"form-control" %>
+			</div>
+			<%= f.submit "Updare Book", class:"btn btn-primary form-control" %>
+			<%= link_to "Show", book_path(@book.id) %>
+			<span>|</span>
+			<%= link_to "Back", :back %>
+			<% end %>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,19 @@
+<div class="">
+	<h2>User info</h2>
+	<%= form_for (@user) do |f| %>
+	<%= render "layouts/error_messages", model:f.object %>
+	<div class="form-group">
+		<%= f.label :name, "Name" %>
+		<%= f.text_field :name %>
+	</div>
+	<div class="form-group">
+		<%= f.label :profile_image, "image" %>
+		<%= f.attachment_field :profile_image %>
+	</div>
+	<div class="form-group">
+		<%= f.label :introduction, "introduction" %>
+		<%= f.text_area :introduction %>
+	</div>
+	<%= f.submit "Update" %>
+	<% end %>
+</div>
