@@ -14,13 +14,21 @@ class ApplicationController < ActionController::Base
     root_path
   end
 
+  def after_sign_up_path_for(resource)
+    flash[:notice] = "Welcome! You have signed up successfully."
+    user_path(resource)
+  end
+
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
-    devise_parameter_sanitizer.permit(:sign_in, keys: [:name])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name])
+    added_attrs = [:name, :email, :password, :password_confirmation, :remember_me]
+    devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
+    devise_parameter_sanitizer.permit :sign_in, keys: added_attrs
+    devise_parameter_sanitizer.permit :account_update, keys: added_attrs
   end
+
+  
 
 
 end

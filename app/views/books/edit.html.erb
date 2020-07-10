@@ -12,10 +12,10 @@
 				<%= f.label :body, "Opinion" %>
 				<%= f.text_area :body, class:"form-control" %>
 			</div>
-			<%= f.submit "Updare Book", class:"btn btn-primary form-control" %>
+			<%= f.submit "Update Book", class:"btn btn-primary form-control" %>
 			<%= link_to "Show", book_path(@book.id) %>
 			<span>|</span>
-			<%= link_to "Back", :back %>
+			<%= link_to "Back", books_path %>
 			<% end %>
 		</div>
 	</div>

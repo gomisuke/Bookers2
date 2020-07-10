@@ -30,7 +30,7 @@
               </li>
               <li>
                 <%= link_to new_user_registration_path do %>
-                  <span class="glyphicon glyphicon-edit" aria-hidden="true">Sign up</span>
+                  <span class="glyphicon glyphicon-edit" aria-hidden="true">sign up</span>
                 <% end %>
               </li>
               <li>
@@ -69,7 +69,13 @@
     </header>
     <%= yield %>
     <footer>
-      <p class="text-right">CopyRight Infratop.inc</p>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 col-md-offset-9">
+             <p class="text-right">CopyRight Infratop.inc</p>
+           </div>
+         </div>
+       </div>
     </footer>
   </body>
 </html>
