@@ -35,6 +35,8 @@ before_action :correct_user, only:[:edit]
       @user = User.find(@post.user.id)
       @book = Book.new
       @post_user = User.find(@post.user_id)
+      @comment = BookComment.new
+      @comments = BookComment.where(book_id: params[:id])
   end
 
   def edit
