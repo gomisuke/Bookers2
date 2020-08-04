@@ -11,6 +11,8 @@
 						<th>image</th>
 						<th>name</th>
 						<th></th>
+						<th></th>
+						<th></th>
 					</tr>
 				</thead>
 				<% @users.each do |user| %>
@@ -20,8 +22,17 @@
 						<% end %>
 					</td>
 					<td><%= user.name  %></td>
-					<td><%= link_to "Show", user_path(user.id) %>
-				</tr>
+					<td>フォロワー数:<%= user.followed.count %></td>
+					<td class="btn-group-xs">
+						<% if current_user != user %>
+							<% if current_user.following?(user) %>
+								<%= link_to "フォローを外す", unfollow_path(user), method: :post, class:"btn btn-primary" %>
+							<% else %>
+								<%= link_to "フォローする", follow_path(user), method: :post, class:"btn btn-success" %>
+							<% end %>
+						<% end %>
+					</td>
+					<td><%= link_to "Show", user_path(user.id) %></tr>
 				<% end %>
 			</table>
 		</div>
