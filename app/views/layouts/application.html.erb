@@ -66,6 +66,16 @@
       <% if flash[:notice] %>
         <%= flash[:notice] %>
       <% end %>
+      <% if user_signed_in? %>
+        <div class="center-block" style="width: 400px">
+          <%= form_tag search_path, method: :get do %>
+            <%= text_field_tag :search %>
+            <%= select_tag(:model, options_for_select([["User","user_match"],["Book","book_match"]])) %>
+            <%= select_tag(:match, options_for_select([["完全一致","perfect"],["部分一致","partial"],["前方一致","forward"],["後方一致","back"]])) %>
+            <%= submit_tag '検索' %>
+          <% end %>
+        </div>
+      <% end %>
     </header>
     <%= yield %>
     <footer>

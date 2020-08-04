@@ -1,0 +1,44 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h2>Books search for '<%= @search_word %>'</h2>
+			<table class="table">
+				<% if @users %>
+					<thead>
+						<tr>
+							<th></th>
+							<th>Name</th>
+							<th>フォロワー数</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% @users.each do |user| %>
+						<tr>
+							<td><%= attachment_image_tag user, :profile_image, size:"50x50", format:"jpeg", fallback: "no_image.jpeg" %></td>
+							<td><%= user.name %></td>
+							<td>フォロワー数:<%= user.follower.count %></td>
+						</tr>
+						<% end %>
+					</tbody>
+				<% else %>
+					<thead>
+						<tr>
+							<th></th>
+							<th>Title</th>
+							<th>Opinion</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% @books.each do |book| %>
+						<tr>
+							<td><%= attachment_image_tag book.user, :profile_image, size:"50x50", format:"jpeg", fallback: "no_image.jpeg" %></td>
+							<td><%= book.title %></td>
+							<td><%= book.body %></td>
+						</tr>
+						<% end %>
+					</tbody>
+				<% end %>
+			</table>
+		</div>
+	</div>
+</div>

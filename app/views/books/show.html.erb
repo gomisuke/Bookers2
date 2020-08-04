@@ -9,7 +9,7 @@
 				<tr>
 					<td><%= attachment_image_tag @post_user, :profile_image, size:"50x50", format: "jpeg", class: "", fallback: "no_image.jpeg" %>
 						<p><%= link_to @post_user.name, user_path(@post_user.id) %></p>
-					</td> <!-- image -->
+					</td>
 					<td><%= link_to @post.title, "" %></td>
 					<td><%= @post.body %></td>
 					<% if @post_user.id == current_user.id %>

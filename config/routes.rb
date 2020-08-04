@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post 'unfollow/:id' => 'relationships#destory', as:'unfollow'
   get 'following/index/:id' => 'relationships#following_index', as:'following_index'
   get 'follower/index/:id' => 'relationships#follower_index', as: 'follower_index'
+  get 'search' => 'searchs#search', as: 'search'
   resources :books, only:[:index, :create, :show, :edit, :update, :destroy] do
   	resource :favorites, only:[:create, :destroy]
   	resources :book_comments, only:[:create, :destroy]

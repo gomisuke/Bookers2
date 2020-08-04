@@ -24,7 +24,7 @@ before_action :correct_user, only:[:edit, :update]
   
   def index
   	@users = User.all
-  	@user = User.find(current_user.id)              #要修正
+  	@user = User.find(current_user.id)
   	@book = Book.new
   end
 
