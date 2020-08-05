@@ -1,0 +1,9 @@
+<% comments.each do |comment| %>
+	<div class="comment btn-group-xs">
+		<%= attachment_image_tag comment.user, :profile_image, size:"60x60", format:"jpeg", fallback: "no_image.jpeg" %>
+		<%= comment.comment %>
+		<% if current_user == comment.user %>
+			<%= link_to "Destroy", book_book_comment_path(comment.book_id, comment.id), method: :delete, remote: true, class:"btn btn-danger" %>
+		<% end %>
+	</div>
+<% end %>
