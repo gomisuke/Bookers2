@@ -14,6 +14,26 @@
   </div>
 
   <div class="form-group">
+    <%= f.label :postcode %><br />
+    <%= f.text_field :postcode, autofocus: true, autocomplete: "postcode" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :prefecture_code %><br />
+    <%= f.text_field :prefecture_code, autofocus: true, autocomplete: "prefecture_code" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :address_city %><br />
+    <%= f.text_field :address_city, autofocus: true, autocomplete: "address_city" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :address_street %><br />
+    <%= f.text_field :address_street, autofocus: true, autocomplete: "address_street" %>
+  </div>
+
+  <div class="form-group">
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>

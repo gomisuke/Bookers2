@@ -7,8 +7,6 @@ class User < ApplicationRecord
   validates :name, length:{ in: 2..20 }
   validates :introduction, length:{maximum:50}
 
-
-
   attachment :profile_image
   has_many :books, dependent: :destroy
   has_many :favorites, dependent: :destroy
@@ -16,8 +14,19 @@ class User < ApplicationRecord
 
   has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
-  has_many :following_user, through: :follower, source: :followed
-  has_many :follower_user, through: :followed, source: :follower
+  has_many :following_user, through: :follower, source: :followed, dependent: :destroy
+  has_many :follower_user, through: :followed, source: :follower, dependent: :destroy
+
+  include JpPrefecture
+  jp_prefecture :prefecture_code
+
+  def prefecture_name
+    JpPrefucture::Prefecture.find(code: prefecture_code).try(:name)
+  end
+
+  def prefecture_name=(prefecture_name)
+    self.prefecture_code = JpPrefucture::Prefecture.find(name: prefecture_name).code
+  end
 
   def follow(user_id)
     follower.create(followed_id: user_id)

@@ -1,2 +1,5 @@
-$('#book_<%= @book.id %>').html("<%= j(render 'books/books', { book: @book }) %>");
-$('#book_show').html("<%= j(render 'books/book_show', { post: @book }) %>");
+if (location.pathname != '/books/<%= @book.id %>') {
+	$('#book_<%= @book.id %>').html("<%= j(render 'books/books', { book: @book }) %>")
+} else {
+	$('#book_show').html("<%= j(render 'books/book_show', { post: @book }) %>")
+}
