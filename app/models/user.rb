@@ -11,22 +11,11 @@ class User < ApplicationRecord
   has_many :books, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :book_commentd, dependent: :destroy
-
+  #フォロー機能関連
   has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :following_user, through: :follower, source: :followed, dependent: :destroy
   has_many :follower_user, through: :followed, source: :follower, dependent: :destroy
-
-  include JpPrefecture
-  jp_prefecture :prefecture_code
-
-  def prefecture_name
-    JpPrefucture::Prefecture.find(code: prefecture_code).try(:name)
-  end
-
-  def prefecture_name=(prefecture_name)
-    self.prefecture_code = JpPrefucture::Prefecture.find(name: prefecture_name).code
-  end
 
   def follow(user_id)
     follower.create(followed_id: user_id)
@@ -40,6 +29,27 @@ class User < ApplicationRecord
     following_user.include?(user)
   end
 
+
+  #マップ関連
+  include JpPrefecture
+  jp_prefecture :prefecture_code
+
+  geocoded_by :address
+  after_validation :geocode
+
+  def address
+    [address_city, address_street].compact.join(',')
+  end
+
+  def prefecture_name
+    JpPrefecture::Prefecture.find(code: prefecture_code).try(:name)
+  end
+
+  def prefecture_name=(prefecture_name)
+    self.prefecture_code = JpPrefecture::Prefecture.find(name: prefecture_name).code
+  end
+
+  #検索機能
   def User.search(search, user_or_book, search_match)
     if user_or_book == "user_match"
       case search_match

@@ -20,12 +20,12 @@
 
   <div class="form-group">
     <%= f.label :prefecture_code %><br />
-    <%= f.text_field :prefecture_code, autofocus: true, autocomplete: "prefecture_code" %>
+    <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, autofocus: true, autocomplete: "prefecture_code", id:"user_prefecture_code" %>
   </div>
 
   <div class="form-group">
     <%= f.label :address_city %><br />
-    <%= f.text_field :address_city, autofocus: true, autocomplete: "address_city" %>
+    <%= f.text_field :address_city, autofocus: true, autocomplete: "address_city" , id:"user_address_city" %>
   </div>
 
   <div class="form-group">
