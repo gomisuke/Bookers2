@@ -27,30 +27,32 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
+			<% if current_user == @user %>
 			<h2>Your MAP</h2>
-			<%= @user.prefecture_name %>
-			<div id="map">
+			
+				<div id="map">
 
 
-			<script>
-				function initMap(){
-					let pos = new google.maps.LatLng(
-					   '<%= @user.latitude %>', //latitude
-					   '<%= @user.longitude %>'  //longitude
-					  );
-					let map = new google.maps.Map(document.getElementById('map'), {
-					zoom: 12,
-					center: pos
-					});
+				<script>
+					function initMap(){
+						let pos = new google.maps.LatLng(
+						   '<%= @user.latitude %>',
+						   '<%= @user.longitude %>'
+						  );
+						let map = new google.maps.Map(document.getElementById('map'), {
+						zoom: 12,
+						center: pos
+						});
 
-					marker = new google.maps.Marker({
-     					position: pos,
-   						map: map
-   					});
-				}
-			</script>
-			<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['API_KEY'] %>&callback=initMap" async defer></script>
-			</div>
+						marker = new google.maps.Marker({
+	     					position: pos,
+	   						map: map
+	   					});
+					}
+				</script>
+				<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['API_KEY'] %>&callback=initMap" async defer></script>
+				</div>
+			<% end %>
 		</div>
 	</div>
 </div>

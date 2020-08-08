@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :books, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :book_commentd, dependent: :destroy
+  
   #フォロー機能関連
   has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
@@ -34,12 +35,8 @@ class User < ApplicationRecord
   include JpPrefecture
   jp_prefecture :prefecture_code
 
-  geocoded_by :address
+  geocoded_by :address_city
   after_validation :geocode
-
-  def address
-    [address_city, address_street].compact.join(',')
-  end
 
   def prefecture_name
     JpPrefecture::Prefecture.find(code: prefecture_code).try(:name)
