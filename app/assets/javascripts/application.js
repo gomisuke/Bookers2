@@ -16,3 +16,16 @@
 //= require bootstrap-sprockets
 //= require_tree .
 
+$(function(){
+	function toFullWidth(input) {
+		return input.replace(/[!-~]/g,
+			function(input){
+				return String.formCharCode(input.charCodeAt(0)+0xFEE0);
+			}
+		);
+	};
+
+	$('#address_street').on('blur',function(e){
+		$(this).val(toFullWidth($(this).val()));
+	});
+});
